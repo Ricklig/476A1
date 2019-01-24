@@ -6,8 +6,16 @@ public class Move : MonoBehaviour
 {
 
     enum curState {Pursue, Arrive, Flee, Wander};
-    private curState myState; 
+    curState myState; 
 
+    private Vector3 target;
+    public GameObject hunted;
+    public GameObject seek;
+    float speed = 20.0f;
+    float nearSpeed = 10.0f;
+    float nearRadius = 2.0f;
+    float arrivalRadius = 10.0f;
+    float distanceFromTarget;
 
     private Transform playerPos;
     private Rigidbody playerRb;
@@ -20,9 +28,7 @@ public class Move : MonoBehaviour
     private bool motion;
     public float step = 0;
 
-    private Vector3 target;
-
-    public GameObject hunted;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -47,13 +53,25 @@ public class Move : MonoBehaviour
 
     public void Pursue(GameObject hunted)
     {
-        
+       
     }
 
-    public void Arrive(Vector3 target)
+    public void Arrive(GameObject seek)
     {
         if (!motion)
         {
+
+            distanceFromTarget = (seek.transform.position-playerPos.position).magnitude;
+            if (distanceFromTarget > arrivalRadius)
+            {
+                playerPos.position = Vector3.MoveTowards(playerPos.position, seek.transform.position, speed * Time.deltaTime);
+            }
+            else
+            {
+
+            }
+            
+            
             playerPos.position = Vector3.MoveTowards(playerPos.position, movement, 10 * Time.deltaTime);
         }
         else
@@ -120,7 +138,7 @@ public class Move : MonoBehaviour
         }
         else if (myState == curState.Arrive)
         {
-            Arrive(target);
+            Arrive(seek);
         }
         else if (myState == curState.Flee)
         {
@@ -131,4 +149,5 @@ public class Move : MonoBehaviour
             Pursue(hunted);
         }
     }
+
 }

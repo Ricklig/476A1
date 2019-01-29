@@ -8,6 +8,8 @@ TagManager:
   - BFLAG
   - RPLAYER
   - BPLAYER
+  - RHOME
+  - BHOME
   layers:
   - Default
   - TransparentFX
@@ -19,13 +21,13 @@ TagManager:
   - 
   - PostProcessing
   - 
+  - BFLAG
+  - BPLAYER
+  - RFLAG
+  - RPLAYER
+  - BFREEZE
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - RFREEZE
   - 
   - 
   - 
